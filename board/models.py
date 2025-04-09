@@ -9,6 +9,11 @@ class Post(models.Model):
     content = models.TextField(
         help_text="내용",
     )
+    classification = models.CharField(
+        max_length=100,
+        help_text="분류",
+        default="자유게시판",
+    )
     music_link = models.CharField(
         max_length=1024,
         help_text="음악 링크",
