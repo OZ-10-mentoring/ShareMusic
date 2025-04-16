@@ -11,7 +11,7 @@ def home(request):
 
 
 def get_posts(request, board_name):
-    # Selcet * from board_post;
+    # Selcet * from board_post
     korea_board_name = "게시판"
     if board_name == "recommend":
         korea_board_name = "추천"
