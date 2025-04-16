@@ -53,6 +53,18 @@
             color: #666;
             font-size: 14px;
         }
+        .post-info {
+            display: flex;
+            align-items: center;
+        }
+        .post-genre {
+            background-color: #e0e0e0;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            color: #333;
+            margin-right: 10px;
+        }
         .write-button {
             display: inline-block;
             padding: 10px 20px;
@@ -73,7 +85,10 @@
         <ul class="post-list">
             {% for post in posts %}
                 <li class="post-item">
-                    <a href="#" class="post-title">{{ post.title }}</a>
+                    <div class="post-info">
+                        <span class="post-genre">{{ post.genre }}</span>
+                        <a href="#" class="post-title">{{ post.title }}</a>
+                    </div>
                     <span class="post-date">{{ post.created_at|date:"Y-m-d H:i:s" }}</span>
                 </li>
             {% endfor %}
