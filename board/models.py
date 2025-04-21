@@ -12,7 +12,7 @@ class Post(models.Model):
     classification = models.CharField(
         max_length=100,
         help_text="분류",
-        default="자유게시판",
+        default="free",
     )
     music_link = models.CharField(
         max_length=1024,

@@ -13,6 +13,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='post',
             name='classification',
-            field=models.CharField(default='자유게시판', help_text='분류', max_length=100),
+            field=models.CharField(default='free', help_text='분류', max_length=100),
         ),
     ]
