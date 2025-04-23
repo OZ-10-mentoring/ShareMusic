@@ -1,4 +1,3 @@
-from django.http import Http404
 from django.shortcuts import render, redirect
 
 from board.models import Post
@@ -76,6 +75,27 @@ def update_post_view(request, post_id):
             "action": "update",
         },
     )
+
+
+def update_post_action(request, post_id):
+    try:
+        post = Post.objects.get(id=post_id)
+        title = request.POST.get('title')
+        content = request.POST.get('content2')
+        music_link = request.POST.get('music_link')
+        genre = request.POST.get('genre')
+    except Post.DoesNotExist:
+        return render(
+            request,
+            "404.html",
+            {}
+        )
+    post.title = title
+    post.content = content
+    post.music_link = music_link
+    post.genre = genre
+    post.save()
+    return redirect('get_post_detail', post_id=post.id)
 
 
 def create_post(request):

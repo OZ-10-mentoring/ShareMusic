@@ -71,7 +71,7 @@
 <body>
     <div class="container">
         <h1>{% if action != "update" %}{{ korea_board_name }} 게시판 글쓰기{% endif %}</h1>
-        <form method="post">
+        <form method="post" {% if action == "update" %}action="/post/{{ post.id }}/update/action"{% endif %}>
             {% csrf_token %}
             <div class="form-group">
                 <label for="title">제목</label>
