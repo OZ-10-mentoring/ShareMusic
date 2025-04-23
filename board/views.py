@@ -19,13 +19,22 @@ def get_posts(request, board_name):
     korea_board_name = "게시판"
     if board_name == "recommend":
         korea_board_name = "recommend"
-        post_qs = Post.objects.filter(classification__in=["추천", "추천게시판", "recommend"])
+        post_qs = Post.objects.filter(
+            classification__in=["추천", "추천게시판", "recommend"],
+            is_deleted=False,
+        )
     elif board_name == "review":
         korea_board_name = "review"
-        post_qs = Post.objects.filter(classification__in=["리뷰", "리뷰게시판", "review"])
+        post_qs = Post.objects.filter(
+            classification__in=["리뷰", "리뷰게시판", "review"],
+            is_deleted=False,
+        )
     elif board_name == "free":
         korea_board_name = "free"
-        post_qs = Post.objects.filter(classification__in=["자유", "자유게시판", "free"])
+        post_qs = Post.objects.filter(
+            classification__in=["자유", "자유게시판", "free"],
+            is_deleted=False,
+        )
 
     return render(
         request,
@@ -96,6 +105,20 @@ def update_post_action(request, post_id):
     post.genre = genre
     post.save()
     return redirect('get_post_detail', post_id=post.id)
+
+
+def delete_post(request, post_id):
+    try:
+        post = Post.objects.get(id=post_id)
+        post.is_deleted = True
+        post.save()
+    except Post.DoesNotExist:
+        return render(
+            request,
+            "404.html",
+            {}
+        )
+    return redirect('home')
 
 
 def create_post(request):

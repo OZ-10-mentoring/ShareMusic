@@ -20,6 +20,10 @@ class Post(models.Model):
         null=True,
         blank=True,
     )
+    is_deleted = models.BooleanField(
+        default=False,
+        help_text="삭제여부",
+    )
     genre = models.CharField(
         max_length=10,
         help_text="장르",
