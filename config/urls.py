@@ -7,6 +7,7 @@ from board.views import (
     get_posts,
     get_post_detail,
     get_genre_posts,
+    update_post_view,
 )
 
 
@@ -16,5 +17,6 @@ urlpatterns = [
     path('board/<str:board_name>', get_posts, name='get_boards'),
     path('board/post/write', create_post, name='create_post'),
     path('board/genre/', get_genre_posts, name='get_genre_posts'),
-    path('post/<int:post_id>', get_post_detail, name='get_post_detail')
+    path('post/<int:post_id>', get_post_detail, name='get_post_detail'),
+    path('post/<int:post_id>/update', update_post_view, name='update_post_view')
 ]

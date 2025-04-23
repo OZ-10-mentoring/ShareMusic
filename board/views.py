@@ -57,6 +57,27 @@ def get_post_detail(request, post_id):
     )
 
 
+def update_post_view(request, post_id):
+    try:
+        post = Post.objects.get(id=post_id)
+    except Post.DoesNotExist:
+        return render(
+            request,
+            "404.html",
+            {}
+        )
+    return render(
+        request,
+        "write.html",
+        {
+            "korea_board_name": post.classification,
+            "board_name": post.classification,
+            "post": post,
+            "action": "update",
+        },
+    )
+
+
 def create_post(request):
     board_name = request.GET.get('type')
     korea_board_name = "board"
