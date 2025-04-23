@@ -1,12 +1,17 @@
+from django.http import Http404
 from django.shortcuts import render, redirect
 
 from board.models import Post
 
 
 def home(request):
+    post_qs = Post.objects.values("genre").distinct()
     return render(
         request,
         "home.html",
+        {
+            'post_qs': post_qs,
+        }
     )
 
 
@@ -30,6 +35,24 @@ def get_posts(request, board_name):
             "posts": post_qs,
             "korea_board_name": korea_board_name,
             "board_name": board_name,
+        }
+    )
+
+
+def get_post_detail(request, post_id):
+    try:
+        post = Post.objects.get(id=post_id)
+    except Post.DoesNotExist:
+        return render(
+            request,
+            "404.html",
+            {}
+        )
+    return render(
+        request,
+        "post.html",
+        {
+            "post": post,
         }
     )
 
@@ -72,6 +95,7 @@ def create_post(request):
             genre=genre,
         )
         return redirect('get_boards', board_name=board_name)
+
 
 def get_genre_posts(request):
     genre = request.GET.get("genre")
