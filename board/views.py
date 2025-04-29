@@ -56,11 +56,13 @@ def get_post_detail(request, post_id):
             "404.html",
             {}
         )
+    before = request.GET.get('before', '')
     return render(
         request,
         "post.html",
         {
             "post": post,
+            "before": before
         }
     )
 
@@ -108,6 +110,7 @@ def update_post_action(request, post_id):
 
 
 def delete_post(request, post_id):
+    before = request.GET.get('before')
     try:
         post = Post.objects.get(id=post_id)
         post.is_deleted = True
@@ -118,7 +121,7 @@ def delete_post(request, post_id):
             "404.html",
             {}
         )
-    return redirect('home')
+    return redirect(f'/board/{before}')
 
 
 def create_post(request):
@@ -163,7 +166,7 @@ def create_post(request):
 
 def get_genre_posts(request):
     genre = request.GET.get("genre")
-    post_qs = Post.objects.filter(genre=genre)
+    post_qs = Post.objects.filter(genre=genre, is_deleted = False)
     return render(
         request,
         "board.html",
@@ -172,3 +175,7 @@ def get_genre_posts(request):
             "genre": genre
         }
     )
+
+def post_back(request, post_id):
+    before = request.GET.get('before')
+    return redirect(f'/board/{before}')

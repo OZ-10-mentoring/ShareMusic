@@ -10,6 +10,7 @@ from board.views import (
     get_genre_posts,
     update_post_action,
     update_post_view,
+    post_back
 )
 
 
@@ -22,5 +23,7 @@ urlpatterns = [
     path('post/<int:post_id>', get_post_detail, name='get_post_detail'),
     path('post/<int:post_id>/update', update_post_view, name='update_post_view'),
     path('post/<int:post_id>/update/action', update_post_action, name='update_post_action'),
-    path('post/<int:post_id>/delete', delete_post, name='delete_post')
+    path('post/<int:post_id>/delete', delete_post, name='delete_post'),
+    path('post/<int:post_id>/back', post_back, name='post_back')
+
 ]
