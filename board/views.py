@@ -113,6 +113,13 @@ def update_post_action(request, post_id):
     post.music_link = music_link
     post.genre = genre
     post.save()
+    PostSummary.objects.create(
+        post=post,
+        content=generate_ai_summary(
+            title,
+            content,
+        )
+    )
     return redirect('get_post_detail', post_id=post.id)
 
 
