@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 
-from board.models import Post
+from board.models import Post, PostSummary
+from common.utils import generate_ai_summary
 
 
 def home(request):
@@ -154,12 +155,19 @@ def create_post(request):
             korea_board_name = "review"
         elif board_name == "free":
             korea_board_name = "free"
-        Post.objects.create(
+        post = Post.objects.create(
             title=title,
             content=content,
             classification=korea_board_name,
             music_link=music_link,
             genre=genre,
+        )
+        PostSummary.objects.create(
+            post=post,
+            content=generate_ai_summary(
+                title,
+                content,
+            )
         )
         return redirect('get_boards', board_name=board_name)
 
