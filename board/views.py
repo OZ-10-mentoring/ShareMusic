@@ -57,13 +57,19 @@ def get_post_detail(request, post_id):
             "404.html",
             {}
         )
+    post_summary = PostSummary.objects.filter(
+        post=post,
+    ).order_by(
+        "-id",
+    ).first()
     before = request.GET.get('before', '')
     return render(
         request,
         "post.html",
         {
             "post": post,
-            "before": before
+            "before": before,
+            "post_summary": post_summary,
         }
     )
 

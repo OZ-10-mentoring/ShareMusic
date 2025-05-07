@@ -97,6 +97,33 @@
         .back-button:hover {
             background-color: #616161;
         }
+        .summary-section {
+            background-color: #f8f9fa;
+            border-left: 4px solid #2196F3;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .summary-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            color: #2196F3;
+        }
+        .summary-header i {
+            margin-right: 8px;
+            font-size: 20px;
+        }
+        .summary-content {
+            font-size: 15px;
+            line-height: 1.6;
+            color: #444;
+            background-color: white;
+            padding: 15px;
+            border-radius: 6px;
+            border: 1px solid #e0e0e0;
+        }
     </style>
 </head>
 <body>
@@ -108,6 +135,18 @@
                 <span class="post-date">{{ post.created_at }}</span>
             </div>
         </div>
+
+        {% if post_summary %}
+            <div class="summary-section">
+                <div class="summary-header">
+                    <i>🤖</i>
+                    <strong>AI 요약</strong>
+                </div>
+                <div class="summary-content">
+                    {{ post_summary.content }}
+                </div>
+            </div>
+        {% endif %}
 
         <div class="music-link">
             <strong>음악 링크:</strong>
