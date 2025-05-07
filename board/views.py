@@ -96,6 +96,7 @@ def update_post_view(request, post_id):
 
 
 def update_post_action(request, post_id):
+    is_content_changed = False
     try:
         post = Post.objects.get(id=post_id)
         title = request.POST.get('title')
@@ -108,18 +109,21 @@ def update_post_action(request, post_id):
             "404.html",
             {}
         )
+    if post.content != content:
+        is_content_changed = True
     post.title = title
     post.content = content
     post.music_link = music_link
     post.genre = genre
     post.save()
-    PostSummary.objects.create(
-        post=post,
-        content=generate_ai_summary(
-            title,
-            content,
+    if is_content_changed:
+        PostSummary.objects.create(
+            post=post,
+            content=generate_ai_summary(
+                title,
+                content,
+            )
         )
-    )
     return redirect('get_post_detail', post_id=post.id)
 
 
