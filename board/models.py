@@ -1,5 +1,7 @@
 from django.db import models
 
+from customer.models import Customer
+
 
 class Post(models.Model):
     title = models.CharField(
@@ -27,6 +29,12 @@ class Post(models.Model):
     genre = models.CharField(
         max_length=10,
         help_text="장르",
+    )
+    customer = models.ForeignKey(
+        Customer,
+        on_delete=models.DO_NOTHING,
+        null=True,
+        default=None,
     )
     created_at = models.DateTimeField(
         auto_now_add=True,

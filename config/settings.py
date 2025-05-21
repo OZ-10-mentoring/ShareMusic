@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'django.contrib.admin',
     'django_celery_results',
     'board',
+    'customer',
 ]
 
 MIDDLEWARE = [
