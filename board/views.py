@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 
 from board.models import Post, PostSummary
+from board.tasks import async_generate_post_summary
 from common.utils import generate_ai_summary
 
 
@@ -117,13 +118,7 @@ def update_post_action(request, post_id):
     post.genre = genre
     post.save()
     if is_content_changed:
-        PostSummary.objects.create(
-            post=post,
-            content=generate_ai_summary(
-                title,
-                content,
-            )
-        )
+        async_generate_post_summary.delay(post.id, title, content)
     return redirect('get_post_detail', post_id=post.id)
 
 
@@ -179,13 +174,7 @@ def create_post(request):
             music_link=music_link,
             genre=genre,
         )
-        PostSummary.objects.create(
-            post=post,
-            content=generate_ai_summary(
-                title,
-                content,
-            )
-        )
+        async_generate_post_summary.delay(post.id, title, content)
         return redirect('get_boards', board_name=board_name)
 
 
