@@ -12,7 +12,9 @@ from board.views import (
     update_post_view,
     post_back
 )
-
+from customer.views import (
+    set_customer_with_cookie,
+)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,6 +26,6 @@ urlpatterns = [
     path('post/<int:post_id>/update', update_post_view, name='update_post_view'),
     path('post/<int:post_id>/update/action', update_post_action, name='update_post_action'),
     path('post/<int:post_id>/delete', delete_post, name='delete_post'),
-    path('post/<int:post_id>/back', post_back, name='post_back')
-
+    path('post/<int:post_id>/back', post_back, name='post_back'),
+    path('customer/set-username', set_customer_with_cookie, name='set_customer_with_cookie'),
 ]

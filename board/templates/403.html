@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>접근 권한 없음 - 음악 공유 커뮤니티</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+        .error-container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+        }
+        .error-code {
+            font-size: 72px;
+            color: #ff4444;
+            margin: 0;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        .error-title {
+            font-size: 24px;
+            color: #333;
+            margin: 20px 0;
+        }
+        .error-message {
+            color: #666;
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+        .button {
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .login-button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+        }
+        .login-button:hover {
+            background-color: #45a049;
+            transform: translateY(-2px);
+        }
+        .home-button {
+            background-color: #f5f5f5;
+            color: #333;
+            border: 2px solid #ddd;
+        }
+        .home-button:hover {
+            background-color: #e5e5e5;
+            transform: translateY(-2px);
+        }
+        .icon {
+            font-size: 100px;
+            margin-bottom: 20px;
+            color: #ff4444;
+        }
+        .help-text {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            color: #888;
+            font-size: 14px;
+        }
+        .help-text a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+        .help-text a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="error-container">
+        <div class="icon">🔒</div>
+        <h1 class="error-code">403</h1>
+        <h2 class="error-title">접근 권한이 없습니다</h2>
+        <p class="error-message">
+            죄송합니다. 이 페이지에 접근할 수 있는 권한이 없습니다.<br>
+            로그인하시거나 회원가입 후 이용해 주세요.
+        </p>
+        <div class="action-buttons">
+            <a href="/customer/login" class="button login-button">로그인하기</a>
+            <a href="/" class="button home-button">홈으로 돌아가기</a>
+        </div>
+        <div class="help-text">
+            계정에 문제가 있으신가요? <a href="/customer/help">고객센터</a>에 문의해 주세요.
+        </div>
+    </div>
+</body>
+</html> 

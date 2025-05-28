@@ -77,6 +77,36 @@
             background-color: #555;
         }
 
+        .username-form {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .username-input {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            margin-right: 10px;
+        }
+
+        .username-submit {
+            padding: 8px 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .username-submit:hover {
+            background-color: #45a049;
+        }
     </style>
 </head>
 <body>
@@ -101,6 +131,15 @@
                 </div>
             </form>
         </div>        
+        <div class="username-form">
+            <form action="/customer/set-username" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <input type="text" name="username" class="username-input" placeholder="사용자 이름을 입력하세요" required>
+                    <button type="submit" class="username-submit">저장</button>
+                </div>
+            </form>
+        </div>
     </div>
 </body>
 </html>

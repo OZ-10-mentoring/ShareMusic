@@ -2,7 +2,6 @@ from django.shortcuts import render, redirect
 
 from board.models import Post, PostSummary
 from board.tasks import async_generate_post_summary
-from common.utils import generate_ai_summary
 
 
 def home(request):
@@ -78,6 +77,12 @@ def get_post_detail(request, post_id):
 def update_post_view(request, post_id):
     try:
         post = Post.objects.get(id=post_id)
+        if request.COOKIES.get('customer_id') != str(post.customer.id):
+            return render(
+                request,
+                "403.html",
+                {}
+            )
     except Post.DoesNotExist:
         return render(
             request,
@@ -100,6 +105,12 @@ def update_post_action(request, post_id):
     is_content_changed = False
     try:
         post = Post.objects.get(id=post_id)
+        if request.COOKIES.get('customer_id') != str(post.customer.id):
+            return render(
+                request,
+                "403.html",
+                {}
+            )
         title = request.POST.get('title')
         content = request.POST.get('content2')
         music_link = request.POST.get('music_link')
@@ -126,6 +137,12 @@ def delete_post(request, post_id):
     before = request.GET.get('before')
     try:
         post = Post.objects.get(id=post_id)
+        if request.COOKIES.get('customer_id') != str(post.customer.id):
+            return render(
+                request,
+                "403.html",
+                {}
+            )
         post.is_deleted = True
         post.save()
     except Post.DoesNotExist:
@@ -173,6 +190,7 @@ def create_post(request):
             classification=korea_board_name,
             music_link=music_link,
             genre=genre,
+            customer_id=request.COOKIES.get('customer_id'),
         )
         async_generate_post_summary.delay(post.id, title, content)
         return redirect('get_boards', board_name=board_name)
